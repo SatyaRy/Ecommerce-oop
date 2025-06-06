@@ -7,10 +7,10 @@ public class Admin {
 
     public Admin(
       int admin_id,
-    String admin_name,
-    String admin_email,
-    String admin_password,
-    String admin_phone_number
+      String admin_name,
+      String admin_email,
+      String admin_password,
+      String admin_phone_number
       ){
         this.admin_id = admin_id;
         this.admin_name = admin_name;

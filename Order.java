@@ -6,9 +6,9 @@ public class Order {
 
     public Order(
       int order_id,
-    String order_status,
-    String order_date,
-    double total_amount
+      String order_status,
+      String order_date,
+      double total_amount
       ){
         this.order_id = order_id;
         this.order_status = order_status;
