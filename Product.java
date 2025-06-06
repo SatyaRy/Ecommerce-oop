@@ -1,4 +1,3 @@
-package ecommerce;
 
 public class Product {
     int product_id;

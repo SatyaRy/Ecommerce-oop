@@ -1,4 +1,4 @@
-package ecommerce;
+
 
 public class Customer {
     int customer_id;
