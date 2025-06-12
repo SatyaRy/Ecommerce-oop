@@ -1,5 +1,3 @@
-
-
 public class Customer {
     int customer_id;
     String customer_name;
