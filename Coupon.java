@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Coupon{
     String couponID;     
     int coupon_code;  
@@ -14,5 +17,19 @@ public class Coupon{
         this.discount_percentage = discount_percentage;
     }
 
+     public boolean isValid() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate today = LocalDate.now();
+        LocalDate expiry = LocalDate.parse(this.expired_date, formatter);
+        return !today.isAfter(expiry);
+    }
+    public double applyDiscount(double totalAmount) {
+        if (isValid()) {
+            return totalAmount - (totalAmount * (discount_percentage / 100));
+        } else {
+            System.out.println("Coupon expired.");
+            return totalAmount;
+        }
+    }
  
 }
