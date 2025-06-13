@@ -54,4 +54,22 @@ public class Cart {
         }
         return total;
     }
+
+    // Adds a product to this cart
+    public void addProductToCart() {}
+
+    // Removes a product from this cart
+    public void removeProductFromCart() {}
+
+    // Updates the quantity of a product in this cart
+    public void updateProductQuantity() {}
+
+    // Clears all products in this cart
+    public void clearCart() {}
+
+    // Displays cart details
+    public void viewCartDetails() {}
+
+    // Validates cart items (e.g., stock availability, product existence)
+    private void validateCartItems() {}
 }
