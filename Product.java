@@ -10,14 +10,15 @@ public class Product {
     private String category;
     private String photo;
     private int quantity;
+    private int sellerId;
 
     // Static collection (shared across all instances)
     private static ArrayList<Product> products = new ArrayList<>();
     private static final String STORE_NAME = "Mini E-Shop for OOP Class"; // static constant
 
-    // Constructor
+    // Constructor with sellerId
     public Product(int productId, String name, String description,
-                   double price, String category, String photo, int quantity) {
+                   double price, String category, String photo, int quantity, int sellerId) {
         this.productId = productId;
         this.name = name;
         this.description = description;
@@ -25,11 +26,18 @@ public class Product {
         this.category = category;
         this.photo = photo;
         this.quantity = quantity;
+        this.sellerId = sellerId;
+    }
+
+    // Overloaded constructor (without sellerId, defaults to 0)
+    public Product(int productId, String name, String description,
+                   double price, String category, String photo, int quantity) {
+        this(productId, name, description, price, category, photo, quantity, 0);
     }
 
     // Overloaded constructor (fewer fields)
     public Product(int productId, String name, double price) {
-        this(productId, name, "No description", price, "General", "no-photo.jpg", 0);
+        this(productId, name, "No description", price, "General", "no-photo.jpg", 0, 0);
     }
 
     // Getter methods (Encapsulation)
@@ -40,6 +48,7 @@ public class Product {
     public String getCategory() { return category; }
     public String getPhoto() { return photo; }
     public int getQuantity() { return quantity; }
+    public int getSellerId() { return sellerId; }
 
     // Static method to display store banner
     public static void showWelcomeMessage() {
@@ -56,6 +65,7 @@ public class Product {
         System.out.println("Category: " + category);
         System.out.println("Photo: " + photo);
         System.out.println("Quantity: " + quantity);
+        System.out.println("Seller ID: " + sellerId);
     }
 
     // Add product to static collection
@@ -100,8 +110,7 @@ public class Product {
             System.out.println("0. Exit");
             System.out.print("Enter choice: ");
 
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // clear buffer
+            int choice = readInt(scanner);
 
             switch (choice) {
                 case 1:
@@ -109,7 +118,7 @@ public class Product {
                     break;
                 case 2:
                     System.out.print("Enter Product ID to view: ");
-                    int id = scanner.nextInt();
+                    int id = readInt(scanner);
                     viewProductById(id);
                     break;
                 case 3:
@@ -124,7 +133,7 @@ public class Product {
             }
         }
 
-        scanner.close();
+        // Do not close scanner tied to System.in
     }
 
     // Create product
@@ -132,8 +141,7 @@ public class Product {
         System.out.println("\nEnter Product Details:");
 
         System.out.print("ID: ");
-        int id = scanner.nextInt(); 
-        scanner.nextLine();
+        int id = readInt(scanner);
 
         System.out.print("Name: ");
         String name = scanner.nextLine();
@@ -142,7 +150,7 @@ public class Product {
         String desc = scanner.nextLine();
 
         System.out.print("Price: ");
-        double price = scanner.nextDouble(); scanner.nextLine();
+        double price = readDouble(scanner);
 
         System.out.print("Category: ");
         String category = scanner.nextLine();
@@ -151,11 +159,38 @@ public class Product {
         String photo = scanner.nextLine();
 
         System.out.print("Quantity: ");
-        int quantity = scanner.nextInt();
+        int quantity = readInt(scanner);
 
-        Product newProduct = new Product(id, name, desc, price, category, photo, quantity);
+        System.out.print("Seller ID: ");
+        int sellerId = readInt(scanner);
+
+        Product newProduct = new Product(id, name, desc, price, category, photo, quantity, sellerId);
         addProductToList(newProduct);
 
         System.out.println("✅ Product added successfully!");
+    }
+
+    // Helper method for safe integer input
+    private static int readInt(Scanner scanner) {
+        while (true) {
+            try {
+                int value = Integer.parseInt(scanner.nextLine());
+                return value;
+            } catch (NumberFormatException e) {
+                System.out.print("Invalid input. Please enter an integer: ");
+            }
+        }
+    }
+
+    // Helper method for safe double input
+    private static double readDouble(Scanner scanner) {
+        while (true) {
+            try {
+                double value = Double.parseDouble(scanner.nextLine());
+                return value;
+            } catch (NumberFormatException e) {
+                System.out.print("Invalid input. Please enter a number: ");
+            }
+        }
     }
 }
