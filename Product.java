@@ -13,7 +13,7 @@ public class Product {
 
     // Static collection (shared across all instances)
     private static ArrayList<Product> products = new ArrayList<>();
-    private static final String STORE_NAME = "Mini E-Shop"; // static constant
+    private static final String STORE_NAME = "Mini E-Shop for OOP Class"; // static constant
 
     // Constructor
     public Product(int productId, String name, String description,

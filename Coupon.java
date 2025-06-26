@@ -1,35 +1,46 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Coupon{
-    String couponID;     
-    int coupon_code;  
-    String created_date;
-    String expired_date;
-    double discount_percentage;
-    // Constructors
+public class Coupon {
+    private String couponId;
+    private int code;
+    private String createdDate;
+    private String expiredDate;
+    private double discountPercentage;
+
     public Coupon() {}
-    public Coupon(String couponID, int coupon_code,String created_date, String expired_date,double discount_percentage) {
-        this.couponID = couponID;
-        this.coupon_code = coupon_code;
-        this.created_date = created_date;
-        this.expired_date = expired_date;
-        this.discount_percentage = discount_percentage;
+
+    public Coupon(String couponId, int code, String createdDate, String expiredDate, double discountPercentage) {
+        this.couponId = couponId;
+        this.code = code;
+        this.createdDate = createdDate;
+        this.expiredDate = expiredDate;
+        this.discountPercentage = discountPercentage;
     }
 
-     public boolean isValid() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    // Getters
+    public String getCouponId() { return couponId; }
+    public int getCode() { return code; }
+    public String getCreatedDate() { return createdDate; }
+    public String getExpiredDate() { return expiredDate; }
+    public double getDiscountPercentage() { return discountPercentage; }
+
+    public boolean isValid() {
         LocalDate today = LocalDate.now();
-        LocalDate expiry = LocalDate.parse(this.expired_date, formatter);
+        LocalDate expiry = LocalDate.parse(this.expiredDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return !today.isAfter(expiry);
     }
-    public double applyDiscount(double totalAmount) {
+
+    public double applyDiscount(double total) {
         if (isValid()) {
-            return totalAmount - (totalAmount * (discount_percentage / 100));
+            return total - (total * (discountPercentage / 100));
         } else {
-            System.out.println("Coupon expired.");
-            return totalAmount;
+            System.out.println("⚠️ Coupon expired.");
+            return total;
         }
     }
- 
+
+    public void showCoupon() {
+        System.out.println("Coupon ID: " + couponId + " | Discount: " + discountPercentage + "% | Expires: " + expiredDate);
+    }
 }
