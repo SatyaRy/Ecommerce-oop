@@ -27,7 +27,7 @@ public class Customer {
     public String getRegisteredDate() { return registeredDate; }
     public String getPhoneNumber() { return phoneNumber; }
 
-    // Display customer summary (optional)
+    // Display customer summary
     public void displayCustomerInfo() {
         System.out.println("\n--- Customer Info ---");
         System.out.println("ID: " + customerId);

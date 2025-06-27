@@ -16,7 +16,7 @@ public class Product {
     private static ArrayList<Product> products = new ArrayList<>();
     private static final String STORE_NAME = "Mini E-Shop for OOP Class"; // static constant
 
-    // Constructor with sellerId
+    // Constructor 
     public Product(int productId, String name, String description,
                    double price, String category, String photo, int quantity, int sellerId) {
         this.productId = productId;
@@ -30,10 +30,10 @@ public class Product {
     }
 
     // Overloaded constructor (without sellerId, defaults to 0)
-    public Product(int productId, String name, String description,
-                   double price, String category, String photo, int quantity) {
-        this(productId, name, description, price, category, photo, quantity, 0);
-    }
+    // public Product(int productId, String name, String description,
+    //                double price, String category, String photo, int quantity) {
+    //     this(productId, name, description, price, category, photo, quantity, 0);
+    // }
 
     // Overloaded constructor (fewer fields)
     public Product(int productId, String name, double price) {

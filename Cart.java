@@ -70,6 +70,4 @@ public class Cart {
     // Displays cart details
     public void viewCartDetails() {}
 
-    // Validates cart items (e.g., stock availability, product existence)
-    private void validateCartItems() {}
 }

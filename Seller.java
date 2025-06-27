@@ -27,7 +27,6 @@ public class Seller {
     public String getAddress() { return address; }
     public String getPhoto() { return photo; }
 
-    // Optional display
     public void displaySellerInfo() {
         System.out.println("\n--- Seller Info ---");
         System.out.println("Name: " + name);
