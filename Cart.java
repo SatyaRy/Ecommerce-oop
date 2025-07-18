@@ -9,7 +9,6 @@ public class Cart {
     private int sellerId;
     private Date createdDate;
     private ArrayList<Product> items;
-
     public Cart(int cartId, int customerId) {
         this.cartId = cartId;
         this.customerId = customerId;
@@ -17,12 +16,10 @@ public class Cart {
         this.createdDate = new Date(System.currentTimeMillis());
         this.items = new ArrayList<>();
     }
-
     // Add product to cart
     public void addProduct(Product product) {
         items.add(product);
     }
-
     // Set sellerId
     public void setSellerId(int sellerId) {
         this.sellerId = sellerId;
@@ -72,4 +69,6 @@ public class Cart {
     // Displays cart details
     public void viewCartDetails() {}
 
+    // Validates cart items (e.g., stock availability, product existence)
+    private void validateCartItems() {}
 }
