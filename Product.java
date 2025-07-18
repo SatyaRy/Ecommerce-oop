@@ -14,7 +14,7 @@ public class Product {
 
     // Static collection (shared across all instances)
     private static ArrayList<Product> products = new ArrayList<>();
-    private static final String STORE_NAME = "Mini E-Shop for OOP Class"; // static constant
+    private static String STORE_NAME = "Mini E-Shop for OOP Class";
 
     // Constructor 
     public Product(int productId, String name, String description,
@@ -29,11 +29,6 @@ public class Product {
         this.sellerId = sellerId;
     }
 
-    // Overloaded constructor (without sellerId, defaults to 0)
-    // public Product(int productId, String name, String description,
-    //                double price, String category, String photo, int quantity) {
-    //     this(productId, name, description, price, category, photo, quantity, 0);
-    // }
 
     // Overloaded constructor (fewer fields)
     public Product(int productId, String name, double price) {
@@ -110,7 +105,15 @@ public class Product {
             System.out.println("0. Exit");
             System.out.print("Enter choice: ");
 
-            int choice = readInt(scanner);
+            int choice = 0;
+            try {
+                choice = scanner.nextInt();
+                scanner.nextLine(); 
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine();
+                continue;
+            }
 
             switch (choice) {
                 case 1:
@@ -118,7 +121,15 @@ public class Product {
                     break;
                 case 2:
                     System.out.print("Enter Product ID to view: ");
-                    int id = readInt(scanner);
+                    int id = 0;
+                    try {
+                        id = scanner.nextInt();
+                        scanner.nextLine(); 
+                    } catch (Exception e) {
+                        System.out.println("Invalid input. Please enter a number.");
+                        scanner.nextLine();
+                        break;
+                    }
                     viewProductById(id);
                     break;
                 case 3:
@@ -132,8 +143,6 @@ public class Product {
                     System.out.println("Invalid choice. Try again.");
             }
         }
-
-        // Do not close scanner tied to System.in
     }
 
     // Create product
@@ -141,7 +150,8 @@ public class Product {
         System.out.println("\nEnter Product Details:");
 
         System.out.print("ID: ");
-        int id = readInt(scanner);
+        int id = scanner.nextInt();
+        scanner.nextLine();
 
         System.out.print("Name: ");
         String name = scanner.nextLine();
@@ -150,7 +160,8 @@ public class Product {
         String desc = scanner.nextLine();
 
         System.out.print("Price: ");
-        double price = readDouble(scanner);
+        double price = scanner.nextDouble();
+        scanner.nextLine();
 
         System.out.print("Category: ");
         String category = scanner.nextLine();
@@ -159,38 +170,17 @@ public class Product {
         String photo = scanner.nextLine();
 
         System.out.print("Quantity: ");
-        int quantity = readInt(scanner);
+        int quantity = scanner.nextInt();
+        scanner.nextLine();
 
         System.out.print("Seller ID: ");
-        int sellerId = readInt(scanner);
+        int sellerId = scanner.nextInt();
+        scanner.nextLine();
 
-        Product newProduct = new Product(id, name, desc, price, category, photo, quantity, sellerId);
-        addProductToList(newProduct);
+        // Create and add the product
+        Product p = new Product(id, name, desc, price, category, photo, quantity, sellerId);
+        addProductToList(p);
 
-        System.out.println("✅ Product added successfully!");
-    }
-
-    // Helper method for safe integer input
-    private static int readInt(Scanner scanner) {
-        while (true) {
-            try {
-                int value = Integer.parseInt(scanner.nextLine());
-                return value;
-            } catch (NumberFormatException e) {
-                System.out.print("Invalid input. Please enter an integer: ");
-            }
-        }
-    }
-
-    // Helper method for safe double input
-    private static double readDouble(Scanner scanner) {
-        while (true) {
-            try {
-                double value = Double.parseDouble(scanner.nextLine());
-                return value;
-            } catch (NumberFormatException e) {
-                System.out.print("Invalid input. Please enter a number: ");
-            }
-        }
+        System.out.println("Product added!");
     }
 }
