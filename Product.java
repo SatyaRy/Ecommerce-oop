@@ -29,12 +29,6 @@ public class Product {
         this.sellerId = sellerId;
     }
 
-
-    // Overloaded constructor (fewer fields)
-    public Product(int productId, String name, double price) {
-        this(productId, name, "No description", price, "General", "no-photo.jpg", 0, 0);
-    }
-
     // Getter methods (Encapsulation)
     public int getProductId() { return productId; }
     public String getName() { return name; }
