@@ -45,7 +45,7 @@ public class User {
         return registeredDate;
     }
 
-    // Setters with robust validation
+    // Setters with validation
     protected void setName(String name) {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Name cannot be null or blank");
