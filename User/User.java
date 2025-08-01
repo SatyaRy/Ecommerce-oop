@@ -3,14 +3,14 @@ package User;
 import java.util.Date;
 
 public class User {
-    protected String name;
-    protected String email;
-    protected String password;
-    protected String phoneNumber;
-    protected String address;
-    protected Date registeredDate;
+    private String name;
+    private String email;
+    private String password;
+    private String phoneNumber;
+    private String address;
+    private Date registeredDate;
 
-    public User(String name, String email, String password,
+    protected User(String name, String email, String password,
                 String phoneNumber, Date registeredDate, String address) {
         setName(name);
         setEmail(email);

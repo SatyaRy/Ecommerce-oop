@@ -7,25 +7,63 @@ public class DigitalProduct extends Product {
     public DigitalProduct(int productId, String name, String description,
                           double price, String photo, int quantity, int sellerId) {
         super(name, description, price, quantity, sellerId);
-        if (productId <= 0) throw new IllegalArgumentException("Product ID must be positive");
+        setProductId(productId);
+        setPhoto(photo);
+    }
 
+    public int getProductId() {
+        if (productId <= 0) throw new IllegalStateException("Invalid product ID");
+        return productId;
+    }
+
+    public String getPhoto() {
+        return photo != null ? photo : "No photo available";
+    }
+
+    public void setProductId(int productId) {
+        if (productId <= 0 || productId > 999999)
+            throw new IllegalArgumentException("Product ID must be between 1 and 999,999");
         this.productId = productId;
-        this.photo = photo;
+    }
+
+    public void setPhoto(String photo) {
+        if (photo != null && photo.trim().isEmpty()) photo = null;
+        if (photo != null && photo.length() > 255)
+            throw new IllegalArgumentException("Photo URL too long");
+        if (photo != null && !photo.trim().matches("^(https?://|www\\.|[a-zA-Z0-9./\\-_]+\\.(jpg|jpeg|png|gif|bmp|webp)).*"))
+            throw new IllegalArgumentException("Invalid photo format");
+        this.photo = photo != null ? photo.trim() : null;
     }
 
     @Override
     public void displayDetails() {
         super.displayDetails();
-        System.out.println("Product ID: " + productId);
+        System.out.println("Product ID: " + getProductId());
         System.out.println("Category: Digital");
-        System.out.println("Photo URL: " + photo);
+        System.out.println("Photo URL: " + getPhoto());
+    }
+
+    @Override
+    public void downloadOrShip() {
+        if (getQuantity() <= 0) {
+            System.out.println("Sorry, the digital product '" + getName() + "' is unavailable.");
+        } else {
+            System.out.println("Preparing digital delivery for: " + getName());
+            System.out.println("Download Link: " + generateDownloadLink());
+            System.out.println("License Key: " + generateLicenseKey());
+        }
+    }
+
+    private String generateDownloadLink() {
+        return "https://download.myeshop.com/" + getProductId();
+    }
+
+    private String generateLicenseKey() {
+        return "KEY-" + getProductId() + "-" + (int)(Math.random() * 100000);
     }
 
     @Override
     public String toString() {
         return super.toString() + ", DigitalProduct{ID=" + productId + ", category='Digital'}";
     }
-
-    public int getProductId() { return productId; }
-    public String getPhoto() { return photo; }
 }

@@ -1,6 +1,6 @@
 package Product;
+
 import java.util.ArrayList;
-// import java.util.Scanner;
 
 public class Product {
     private String name;
@@ -13,49 +13,99 @@ public class Product {
     private static String STORE_NAME = "Mini E-Shop for OOP Class";
 
     protected Product(String name, String description, double price, int quantity, int sellerId) {
-        if (name == null || name.isEmpty()) throw new IllegalArgumentException("Name is required");
-        if (price < 0) throw new IllegalArgumentException("Price must be non-negative");
-        if (quantity < 0) throw new IllegalArgumentException("Quantity must be non-negative");
-        if (sellerId <= 0) throw new IllegalArgumentException("Seller ID must be positive");
-
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.quantity = quantity;
-        this.sellerId = sellerId;
+        setName(name);
+        setDescription(description);
+        setPrice(price);
+        setQuantity(quantity);
+        setSellerId(sellerId);
     }
 
-    protected String getName() { return name; }
-    protected String getDescription() { return description; }
-    protected double getPrice() { return price; }
-    protected int getQuantity() { return quantity; }
-    protected int getSellerId() { return sellerId; }
+    // Getters
+    protected String getName() {
+        if (name == null) throw new IllegalStateException("Product name is not set");
+        return name;
+    }
+
+    protected String getDescription() {
+        return description != null ? description : "No description available";
+    }
+
+    protected double getPrice() {
+        if (price < 0) throw new IllegalStateException("Invalid price state detected");
+        return price;
+    }
+
+    protected int getQuantity() {
+        if (quantity < 0) throw new IllegalStateException("Invalid quantity state detected");
+        return quantity;
+    }
+
+    protected int getSellerId() {
+        if (sellerId <= 0) throw new IllegalStateException("Invalid seller ID state detected");
+        return sellerId;
+    }
+
+    // Setters
+    protected void setName(String name) {
+        if (name == null || name.trim().isEmpty()) throw new IllegalArgumentException("Product name cannot be null or empty");
+        if (name.length() > 100) throw new IllegalArgumentException("Product name cannot exceed 100 characters");
+        this.name = name.trim();
+    }
+
+    protected void setDescription(String description) {
+        if (description != null && description.length() > 500)
+            throw new IllegalArgumentException("Description cannot exceed 500 characters");
+        this.description = description != null ? description.trim() : null;
+    }
+
+    protected void setPrice(double price) {
+        if (price < 0) throw new IllegalArgumentException("Price cannot be negative");
+        if (price > 999999.99) throw new IllegalArgumentException("Price cannot exceed $999,999.99");
+        this.price = Math.round(price * 100.0) / 100.0;
+    }
+
+    protected void setQuantity(int quantity) {
+        if (quantity < 0) throw new IllegalArgumentException("Quantity cannot be negative");
+        if (quantity > 100000) throw new IllegalArgumentException("Quantity cannot exceed 100,000 units");
+        this.quantity = quantity;
+    }
+
+    protected void setSellerId(int sellerId) {
+        if (sellerId <= 0) throw new IllegalArgumentException("Seller ID must be a positive integer");
+        this.sellerId = sellerId;
+    }
 
     public static void showWelcomeMessage() {
         System.out.println("Welcome to " + STORE_NAME);
     }
 
-    protected void displayDetails() {
+    public void displayDetails() {
         System.out.println("\n--- Product Details ---");
-        System.out.println("Name: " + name);
-        System.out.println("Description: " + description);
-        System.out.println("Price: $" + price);
-        System.out.println("Quantity: " + quantity);
-        System.out.println("Seller ID: " + sellerId);
+        System.out.println("Name: " + getName());
+        System.out.println("Description: " + getDescription());
+        System.out.println("Price: $" + getPrice());
+        System.out.println("Quantity: " + getQuantity());
+        System.out.println("Seller ID: " + getSellerId());
     }
 
-    protected static void addProductToList(Product p) {
+    public static void addProductToList(Product p) {
+        if (p == null) throw new IllegalArgumentException("Cannot add null product to list");
         products.add(p);
     }
 
-    protected static void listAllProducts() {
+    public static void listAllProducts() {
         if (products.isEmpty()) {
             System.out.println("No products available.");
         } else {
             for (Product p : products) {
                 p.displayDetails();
+                p.downloadOrShip(); // polymorphic method
             }
         }
+    }
+
+    public void downloadOrShip() {
+        System.out.println("Processing product order...");
     }
 
     @Override

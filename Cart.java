@@ -1,6 +1,8 @@
 import java.sql.Date;
 import java.util.ArrayList;
 
+import Product.Product;
+
 public class Cart {
     private int cartId;
     private int customerId;
