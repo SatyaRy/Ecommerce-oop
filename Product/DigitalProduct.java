@@ -1,3 +1,4 @@
+// DigitalProduct Sub Class:
 package Product;
 
 public class DigitalProduct extends Product {
@@ -54,16 +55,38 @@ public class DigitalProduct extends Product {
         }
     }
 
+    
     private String generateDownloadLink() {
         return "https://download.myeshop.com/" + getProductId();
     }
-
+    
     private String generateLicenseKey() {
         return "KEY-" + getProductId() + "-" + (int)(Math.random() * 100000);
     }
-
+    
     @Override
     public String toString() {
         return super.toString() + ", DigitalProduct{ID=" + productId + ", category='Digital'}";
     }
+    
+    //static for subclass DigitalProduct
+    public static void showDigitalDownloadPolicy() {
+    System.out.println("Digital products can be downloaded instantly after purchase.");
+
+    //can implement below:
+    //DigitalProduct.showDigitalDownloadPolicy();
+}
+
+    //create euqal method for the superclass and reuse it in the subclass
+    @Override
+public boolean equals(Object obj) {
+    // First, check with parent equals()
+    if (!super.equals(obj)) return false;
+
+    // Then check if the object is a DigitalProduct
+    if (!(obj instanceof DigitalProduct)) return false;
+
+    DigitalProduct other = (DigitalProduct) obj;
+    return this.getProductId() == other.getProductId(); // add your own subclass logic
+}
 }

@@ -32,4 +32,19 @@ public class Order {
         System.out.println("Date: " + orderDate);
         System.out.println("Total: $" + totalAmount);
     }
+
+    // total revenue
+//     private static double totalRevenue = 0;
+
+    // for constructor
+//     totalRevenue += totalAmount;
+
+    // for getter
+//     public static double getTotalRevenue() {
+//     return totalRevenue;
+// }
+
+
+
+
 }

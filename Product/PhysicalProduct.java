@@ -1,3 +1,4 @@
+// Physical Product Sub Class:
 package Product;
 
 public class PhysicalProduct extends Product {
@@ -85,5 +86,27 @@ public class PhysicalProduct extends Product {
     @Override
     public String toString() {
         return super.toString() + ", PhysicalProduct{ID=" + productId + ", category='" + category + "'}";
+    }
+
+    //implement the correct static method for both parents and sub class.
+    public static void showShippingPolicy() {
+    System.out.println("Physical products will be shipped within 3-5 business days.");
+
+    //can implement below:
+    //PhysicalProduct.showShippingPolicy();
+    
+
+}
+
+
+    //create euqal method for the superclass and reuse it in the subclass
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) return false;
+
+        if (!(obj instanceof PhysicalProduct)) return false;
+
+        PhysicalProduct other = (PhysicalProduct) obj;
+        return this.getProductId() == other.getProductId(); // or any unique check
     }
 }
