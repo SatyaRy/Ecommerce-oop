@@ -28,10 +28,15 @@ public class Customer extends User {
         System.out.println("Customer Email: " + getEmail()); 
     }
 
+    public void updateProfile(String newName, String newEmail) {
+        setName(newName);     
+        setEmail(newEmail);       
+    }
+
     @Override
     public void displayBasicInfo() {
         System.out.println("\n--- Customer Info ---");
         System.out.println("Customer ID: " + customerId);
-        super.displayBasicInfo();
+        printCommonInfo();
     }
 }

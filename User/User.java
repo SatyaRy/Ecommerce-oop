@@ -2,7 +2,7 @@ package User;
 
 import java.util.Date;
 
-public class User {
+public abstract class User {
     private String name;
     private String email;
     private String password;
@@ -91,7 +91,11 @@ public class User {
         this.registeredDate = registeredDate;
     }
 
-    protected void displayBasicInfo() {
+    // ----- Abstract Methods -----
+    protected abstract void displayBasicInfo();       // Display all relevant info
+    protected abstract void updateProfile(String field1, String field2);         // Update relevant fields
+
+    protected void printCommonInfo() {
         System.out.println("Name: " + name);
         System.out.println("Email: " + email);
         System.out.println("Phone: " + phoneNumber);

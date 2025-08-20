@@ -24,19 +24,21 @@ public class Seller extends User {
         return photo;
     }
 
+    
+    public void printSellerName() {
+        System.out.println("Seller Name: " + getName()); 
+    }
+    
     public void updateProfile(String newName, String newEmail) {
         setName(newName);     
         setEmail(newEmail);   
     }
-
-    public void printSellerName() {
-        System.out.println("Seller Name: " + getName()); 
-    }
-
+    
+    @Override
     public void displayBasicInfo() {
         System.out.println("\n--- Seller Info ---");
         System.out.println("Seller ID: " + sellerId);
         System.out.println("Photo: " + photo);
-        super.displayBasicInfo();
+        printCommonInfo();
     }
 }
