@@ -6,7 +6,7 @@ public class Seller extends User {
     private int sellerId;
     private String photo;
 
-    public Seller(int sellerId, String name, String email, String password,
+    protected Seller(int sellerId, String name, String email, String password,
                   String phoneNumber, Date registeredDate, String address, String photo) {
         super(name, email, password, phoneNumber, registeredDate, address);
         if (sellerId <= 0) {
@@ -16,28 +16,29 @@ public class Seller extends User {
         this.photo = photo;
     }
 
-    public int getSellerId() {
+    protected int getSellerId() {
         return sellerId;
     }
 
-    public String getPhoto() {
+    protected String getPhoto() {
         return photo;
     }
 
-    public void updateProfile(String newName, String newEmail) {
+    protected void updateProfile(String newName, String newEmail) {
         setName(newName);     
         setEmail(newEmail);   
     }
 
-    public void printSellerName() {
+    protected void printSellerName() {
         System.out.println("Seller Name: " + getName()); 
     }
 
+    // seller use abstract method to display basic info from User class
     @Override
-    public void displayBasicInfo() {
+    protected void displayBasicInfo() {
         System.out.println("\n--- Seller Info ---");
         System.out.println("Seller ID: " + sellerId);
         System.out.println("Photo: " + photo);
-        super.displayBasicInfo();
+        printCommonInfo();
     }
 }

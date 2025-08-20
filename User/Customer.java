@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Customer extends User {
     private int customerId;
 
-    public Customer(int customerId, String name, String email, String password,
+    protected Customer(int customerId, String name, String email, String password,
                     String phoneNumber, Date registeredDate, String address) {
         super(name, email, password, phoneNumber, registeredDate, address);
         if (customerId <= 0) {
@@ -14,24 +14,25 @@ public class Customer extends User {
         this.customerId = customerId;
     }
 
-    public int getCustomerId() {
+    protected int getCustomerId() {
         return customerId;
     }
 
-    public void updateContactInfo(String newPhone, String newAddress) {
+    protected void updateContactInfo(String newPhone, String newAddress) {
         setPhoneNumber(newPhone);     
         setAddress(newAddress);      
     }
 
 
-    public void showEmail() {
+    protected void showEmail() {
         System.out.println("Customer Email: " + getEmail()); 
     }
 
+    // customer use abstract method to display basic info from User class
     @Override
-    public void displayBasicInfo() {
+    protected void displayBasicInfo() {
         System.out.println("\n--- Customer Info ---");
         System.out.println("Customer ID: " + customerId);
-        super.displayBasicInfo();
+        printCommonInfo();
     }
 }

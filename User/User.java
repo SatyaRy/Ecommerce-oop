@@ -2,7 +2,7 @@ package User;
 
 import java.util.Date;
 
-public class User {
+public abstract class User {
     private String name;
     private String email;
     private String password;
@@ -19,6 +19,19 @@ public class User {
         setRegisteredDate(registeredDate);
         setAddress(address);
     }
+
+    // Abstract method: each subclass MUST write its own version
+    protected abstract void displayBasicInfo();
+
+    //When use for Seller and Customer subclass
+    // User u1 = new Customer(...);
+    // User u2 = new Seller(...);
+
+    // u1.displayBasicInfo(); // Runs Customer version
+    // u2.displayBasicInfo(); // Runs Seller version
+
+
+    
 
     // Getters
     protected String getName() {
@@ -91,7 +104,7 @@ public class User {
         this.registeredDate = registeredDate;
     }
 
-    protected void displayBasicInfo() {
+    protected void printCommonInfo() {
         System.out.println("Name: " + name);
         System.out.println("Email: " + email);
         System.out.println("Phone: " + phoneNumber);
