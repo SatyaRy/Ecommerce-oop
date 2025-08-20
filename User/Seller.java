@@ -33,7 +33,6 @@ public class Seller extends User {
         System.out.println("Seller Name: " + getName()); 
     }
 
-    @Override
     public void displayBasicInfo() {
         System.out.println("\n--- Seller Info ---");
         System.out.println("Seller ID: " + sellerId);

@@ -22,7 +22,7 @@ public class Product {
     }
 
     // Getters
-    protected String getName() {
+    public String getName() {
         if (name == null) throw new IllegalStateException("Product name is not set");
         return name;
     }
@@ -31,7 +31,7 @@ public class Product {
         return description != null ? description : "No description available";
     }
 
-    protected double getPrice() {
+    public double getPrice() {
         if (price < 0) throw new IllegalStateException("Invalid price state detected");
         return price;
     }

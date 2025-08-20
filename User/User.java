@@ -21,7 +21,7 @@ public class User {
     }
 
     // Getters
-    protected String getName() {
+    public String getName() {
         return name;
     }
 
